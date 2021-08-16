@@ -25,7 +25,6 @@ public class borim_3_4 {
         result += (n - 1);
         System.out.println(result);
     }
-
-
+ 
 
 }
