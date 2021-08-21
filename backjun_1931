@@ -1,0 +1,66 @@
+//https://www.acmicpc.net/problem/1931
+import java.util.*;
+
+public class backjun_1931 { //Main 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner in = new Scanner(System.in);
+		
+		int N = in.nextInt();
+		
+		/*
+		  time[][0] 은 시작시점을 의미 
+		  time[][1] 은 종료시점을 의미 
+		*/
+		int[][] time = new int[N][2];
+		
+		for(int i = 0; i < N; i++) {
+			time[i][0] = in.nextInt();	// 시작시간 
+			time[i][1] = in.nextInt();	// 종료시간 
+		}
+		
+		// 끝나는 시간을 기준으로 정렬하기 위해 compare 재정의 
+		Arrays.sort(time, new Comparator<int[]>() {
+			//원하는대로 정렬 조건 compare 메소드 이용해서 오버라이드
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				
+				// 종료시간이 같을 경우 시작시간이 빠른순으로 정렬해야한다.  
+				//끝나는 시간을 기준으로 정렬을 하고 만약 같을 경우에는 시작시간을 기준으로 한다.
+				if(o1[1] == o2[1]) {
+					System.out.println("o1[1] : "  + o1[1]);
+					System.out.println("o2[1] : "  + o2[1]);
+					
+					System.out.println("o1[0] : "  + o1[0]);
+					System.out.println("o2[0] : "  + o2[0]);
+					
+					return o1[0] - o2[0];
+				}
+				
+				return o1[1] - o2[1];
+			}
+ 
+		});
+		int count = 0;
+		int prev_end_time = 0;
+		
+		for(int i = 0; i < N; i++) {
+			System.out.println("time["+i+"][0]"+" time["+i+"][1] : "  + time[i][0] +","+ time[i][1]);
+
+
+			// 직전 종료시간이 다음 회의 시작 시간보다 작거나 같다면 갯수++
+			if(prev_end_time <= time[i][0]) {//시작시간 비교 
+				prev_end_time = time[i][1];
+				count++;
+			}
+		}
+		
+		System.out.println(count);
+
+		
+	}
+
+}
