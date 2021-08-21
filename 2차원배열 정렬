@@ -1,0 +1,53 @@
+
+		import java.util.Arrays;
+		import java.util.Comparator;
+
+
+public class array2 {
+
+	public static void main(String[] args) {
+		//2차원 배열을 정렬 하기 위해서는 Comparator 클래스를 사용해서 compare 함수를 재정의 해줘야합니다.
+		//arr가 [7,6] [2,6] [2,5] 일 때, 오름차순 정렬하는 법
+				int[][] arr = {{7,6},{2,5},{2,6}};
+
+				Arrays.sort(arr,new Comparator<int[]>() {
+					//그냥 2번째 인자는 비교 기준이다 
+					@Override
+					public int compare(int[] o1, int[] o2) {
+						if(o1[0] == o2[0])
+							return o1[1]-o2[1];
+						
+						else
+							return o1[0]-o2[0];
+						//왼쪽같이 크면 양수 , 두값이 같으면 0 , 왼쪽같이 작으면 음수 
+						//그래서 내림차순인 경우는 두값을 반대로 
+						//5-7:음수 //음수가 나온값이 앞에 있는데, 앞수가 작아 //
+						//7-5:양수 //큰게 양수 왼쪽이크다(뺄셈만 하면 어느쪽이 큰지 알수있음) 
+					}
+				});
+
+		//0번째 원소를 비교
+		//return o1[0]-o2[0];
+
+		//만약 arr [2,6] [2,5]로, 0번째 원소가 2로 같다면 o1[1]-o2[1]로 비교를 해줍니다.
+/*
+		if(o1[0] == o2[0]) 
+			return o1[1]-o2[1];
+		else 
+			return o1[0]-o2[0];*/
+/*
+ * 정렬 - 두대상비교 , 자리바꿈 반복 
+		결과
+		인자1> 인자2, 양수
+
+		인자1= 인자2, 0
+
+		인자1< 인자2, 음수
+
+		내림차순 하는 법*/
+
+		//return o2[0]-o1[0];
+	        
+
+}
+}
