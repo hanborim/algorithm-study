@@ -1,0 +1,256 @@
+안녕하세요
+
+이번 포스팅에서는 Priority Queue에 대해서 알아보겠습니다
+
+ 
+
+목차
+
+Priority Queue(우선순위 큐)란?
+Priority Queue 선언하기
+Priority Queue 값 추가하기
+Priority Queue 값 삭제하기
+Priority Queue 크기 구하기
+Priority Queue 값 출력하기
+ 
+
+
+Priority Queue(우선순위 큐)란?
+Priority Queue는 Queue와 구조가 비슷합니다
+
+Queue는 FIFO(First In First Out)구조로 먼저들어온 순서대로 데이터가 나가게 되지만 Priority Queue란 데이터의 우선순위를 정해 우선순위가 높은 순서대로 나가게됩니다
+
+우선순위 큐는 우선순위 힙으로 구현을 할 수 있습니다
+
+데이터를 삽입할 때 우선순위의 최대, 최소를 구성하여 데이터가 빠지면 중간을 계속해서 채워넣는 방식입니다
+
+ 
+
+우선순위 큐의 특징
+
+우선순위 큐는 값을 비교해야하므로 null을 허용하지 않습니다
+
+마찬가지로 비교할 수 없는 객체는 큐를 만들 수 없습니다
+
+내부구조는 이진트리 힙으로 구성되어 있습니다
+
+내부구조가 이진트리로 되어있어서 add() 및 poll() 메서드(추가, 삭제 메서드) 0(log(n)) 시간이 걸립니다
+
+AbstractQueue , AbstractCollection , Collection 및 Object클래스에서 메서드를 상속합니다
+
+우선순위 큐의 설명은 이 정도로 마치겠습니다
+
+이제 사용법에 대해서 알아보겠습니다
+
+ 
+
+
+Priority Queue 선언하기
+// Integer 타입으로 우선순위 큐 선언(낮은 숫자 순으로 우선순위 결정)
+PriorityQueue<Integer> priorityQueue1 = new PriorityQueue<>();
+
+// Integer 타입으로 우선순위 큐 선언(높은 숫자 순으로 우선순위 결정)
+PriorityQueue<Integer> priorityQueue2 = new PriorityQueue<>(Collections.reverseOrder());		
+		
+// Integer 타입으로 우선순위 큐 선언(낮은 숫자 순으로 우선순위 결정)
+PriorityQueue<String> priorityQueue3 = new PriorityQueue<>();
+
+// Integer 타입으로 우선순위 큐 선언(높은 숫자 순으로 우선순위 결정)
+PriorityQueue<String> priorityQueue4 = new PriorityQueue<>(Collections.reverseOrder());	
+Priority Queue의 선언방법입니다
+
+우선순위 큐를 사용하려면 java.util.PriorityQueue를 import해야합니다
+
+PriorityQueue<타입> 변수명 = new PriorityQueue<>(); 이런 식으로 선언하면 됩니다
+
+선언을 하면 기본적으로 낮은 순으로 우선순위가 결정이 됩니다
+
+반대로 선언하고 싶다면 Collections.reverseOrder() 메서드를 사용합니다
+
+Collections 메서드를 사용하려면 java.util.collections를 import해야합니다
+
+ 
+
+
+Priority Queue 값 추가하기
+import java.util.PriorityQueue;
+
+public class PriorityQueueDemo {
+	public static void main(String[] args) {		
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		
+		// 1, 15, 8, 21, 25, 18, 10 값 추가
+		pq.add(1);		pq.add(15);		pq.offer(10);
+		pq.add(21);		pq.add(25);		pq.offer(18);
+		pq.add(8);
+		
+		System.out.print(pq); // 결과 출력
+	}
+}
+우선순위 큐에 값을 추가하는 방법은 add(), offer() 메서드가 있습니다
+
+add() 메서드는 Collection클래스에서 가져오는 메서드라면, offer() Queue클래스에서 가져오는 메서드입니다
+
+결과를 보면 값을 입력한 순서가 아닌 우선순위 큐만의 정렬방식으로 정렬이 됩니다
+
+그 방법은 아래에 설명해놨습니다
+
+ 
+
+결과
+
+
+ 
+
+우선순위 큐의 동작은 아래와 같은 과정을 통해서 정렬이 됩니다
+
+1. 우선순위 큐에 숫자 8을 추가합니다
+
+ 숫자 8은 부모와 비교해서 부모보다 작은 값인 경우 스왑합니다
+
+ 10과 8의 위치가 변경됩니다
+
+
+ 
+
+2. 8은 다시 부모와 값을 비교합니다
+
+ 하지만 자식값이 더 크므로 스왑하지 않습니다
+
+
+ 
+
+
+Priority Queue 값 삭제하기
+import java.util.PriorityQueue;
+
+public class PriorityQueueDemo {
+	public static void main(String[] args) {		
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		
+		// 1, 15, 8, 21, 25, 18, 10 값 추가
+		pq.add(1);		pq.add(15);		pq.offer(10);
+		pq.add(21);		pq.add(25);		pq.offer(18);
+		pq.add(8);
+		
+		System.out.println(pq); // 결과 출력
+		
+		pq.poll();
+
+		System.out.println(pq); // 결과 출력
+
+		pq.remove();
+		pq.remove(1);
+
+		System.out.println(pq); // 결과 출력
+		
+		pq.clear();
+
+		System.out.println(pq); // 결과 출력
+	}
+}
+우선순위 큐에서 값을 삭제하는 방법은 여러가지가 있습니다
+
+poll(), remove() 메서드를 사용하면 우선순위가 가장 높은 값을 제거합니다
+
+remove(int Index) 메서드를 사용하면 Index 순위에 해당하는 값을 제거합니다
+
+clear() 메서드를 사용하면 우선순위 큐의 모든 값을 삭제합니다
+
+ 
+
+결과
+
+
+ 
+
+결과를 보면 알겠지만 첫 번째 우선순위를 삭제하면 하나씩 밀리는 것이 아닌 우선순위를 재정렬합니다
+
+그 방법에 대해서 알아보겠습니다
+
+ 
+
+1. 루트 노드인 (1)과 마지막 노드인 (10)이 스왑됩니다 
+
+
+ 
+
+2. (1)을 제거하고 부모노드(10), 자식노드(15, 8)과 비교하여 더 작은 값이 부모노드로 올라옵니다
+
+
+이렇게 다시 우선순위가 정렬이 됩니다
+
+ 
+
+
+
+ 
+ 
+
+Priority Queue 크기 구하기
+import java.util.PriorityQueue;
+
+public class PriorityQueueDemo {
+	public static void main(String[] args) {		
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		
+		// 1, 15, 8, 21, 25, 18, 10 값 추가
+		pq.add(1);		pq.add(15);		pq.offer(10);
+		pq.add(21);		pq.add(25);		pq.offer(18);
+		pq.add(8);
+		
+		System.out.println(pq.size()); // 결과 출력
+	}
+}
+Priority Queue의 크기를 구하는 방법입니다
+
+size() 메서드를 사용하면 Priority Queue의 개수를 구할 수 있습니다
+
+ 
+
+결과
+
+
+ 
+
+
+Priority Queue 값 출력하기
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class PriorityQueueDemo {
+	public static void main(String[] args) {		
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		
+		// 1, 15, 8, 21, 25, 18, 10 값 추가
+		pq.add(1);		pq.add(15);		pq.offer(10);
+		pq.add(21);		pq.add(25);		pq.offer(18);
+		pq.add(8);
+		
+		System.out.println(pq.peek()); // 결과 출력
+		
+		Iterator iterator = pq.iterator();
+		while(iterator.hasNext())
+			System.out.print(iterator.next() + " ");
+	}
+}
+Priority Queue에서 peek() 메서드를 사용하면 우선순위가 가장 높은 값을 출력합니다
+
+전체 Queue의 값을 가져오려면 Iterator 메서드를 사용하여 가져오면 됩니다
+
+사용방법은 예제를 참고바랍니다
+
+ 
+
+결과
+
+
+ 
+
+이상 Priority Queue의 개념과 사용법에 대해서 살펴봤습니다
+
+추가로 Priority Queue의 메서드 및 개념에 대해서 알아보고 싶은 분들은 아래의 사이트 참고바랍니다
+
+
+
+출처: https://crazykim2.tistory.com/575 [잡다한 프로그래밍]
