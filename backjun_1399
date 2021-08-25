@@ -32,7 +32,7 @@ public class backjun_1399 {
 
 		        System.out.println("num[(t.charAt(+" +j+ ")-65) : " + num[(t.charAt(j)-65)]);
 
-	          //t.charAt(j) 문자1개로 바꿔
+	          //t.charAt(j) 문자1개로 바꿔 
 	        }
 	    }
 	    Arrays.sort(num); //오름차순
